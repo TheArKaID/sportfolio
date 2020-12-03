@@ -3,6 +3,7 @@ var router = express.Router();
 var validator = require('validator');
 const bcrypt = require('bcrypt');
 const models = require('../models/index');
+const jwt = require('jsonwebtoken');
 
 router.get('/', async (req, res, next) => {
   const users = await models.users.findAll({
@@ -13,7 +14,7 @@ router.get('/', async (req, res, next) => {
     res.set({
       'Content-Type': 'application/json'
     })
-    if(users.length!==0) {
+    if(users.length===0!==0) {
       res.json({
         'status': 200,
         'message': 'Success',
@@ -121,13 +122,14 @@ router.post('/', async (req, res, next) => {
     }
 
     // Check Username Taken
-    let user = models.users.findAll({
+    const users = await models.users.findAll({
       where: {
         username: username
       },
       attributes: ['id']
     });
-    if(user) {
+    
+    if(users.length!=0) {
       errors.push({
         "field": "username",
         "key": "username.unique",
@@ -144,18 +146,21 @@ router.post('/', async (req, res, next) => {
       res.end();
     }
 
-    await models.users.create({
+    let newUser = await models.users.create({
       name: name,
       username: username,
       password: await hash(password)
     })
+    var token = jwt.sign({ 
+      id: newUser.id
+    }, '@Sportfolio@');
     
     res.status(200).json({
       'status': '200',
       'message': 'Success',
       'response': {
         'name': name,
-        'username': username
+        'token': token
       }
     });
   } catch (err) {
