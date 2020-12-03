@@ -43,59 +43,83 @@ router.post('/', async (req, res, next) => {
   
     var errors = [];
     // Name Section
-    // Empty Check
-    validator.isEmpty(name) ? errors.push({
-      "field": "name",
-      "key": "name.required",
-      "message": "Name is Required"
-    }) : false;
-    // Lenght Min
-    !validator.isByteLength(name, {min:1, max:50}) ? errors.push({
-      "field": "name",
-      "key": "name.length",
-      "message": "Name must in 8 to 50 range"
-    }) : false;
-    // Alphanumeric Only
-    !validator.isAlphanumeric(name) ? errors.push({
-      "field": "name",
-      "key": "name.type",
-      "message": "Name must in alphanumeric type only"
-    }) : false;
-  
+    if(name) {
+      // Empty Check
+      validator.isEmpty(name) ? errors.push({
+        "field": "name",
+        "key": "name.required",
+        "message": "Name is Required"
+      }) : false;
+      // Lenght Min
+      !validator.isByteLength(name, {min:1, max:50}) ? errors.push({
+        "field": "name",
+        "key": "name.length",
+        "message": "Name must in 8 to 50 range"
+      }) : false;
+      // Alphanumeric Only
+      !validator.isAlphanumeric(name) ? errors.push({
+        "field": "name",
+        "key": "name.type",
+        "message": "Name must in alphanumeric type only"
+      }) : false;
+    } else {
+      errors.push({
+        "field": "name",
+        "key": "name.required",
+        "message": "Name is Required"
+      })
+    }
+
     // Username Section
-    // Empty Check
-    validator.isEmpty(username) ? errors.push({
-      "field": "username",
-      "key": "username.required",
-      "message": "Name is Required"
-    }) : false;
-    // Lenght Min
-    !validator.isByteLength(username, {min:5, max:20}) ? errors.push({
-      "field": "username",
-      "key": "username.length",
-      "message": "Name must in 5 to 20 range"
-    }) : false;
-    // Alphanumeric Only
-    !validator.isAlphanumeric(username) ? errors.push({
-      "field": "username",
-      "key": "username.type",
-      "message": "Name must in alphanumeric type only"
-    }) : false;
-  
+    if(username) {
+      // Empty Check
+      validator.isEmpty(username) ? errors.push({
+        "field": "username",
+        "key": "username.required",
+        "message": "Name is Required"
+      }) : false;
+      // Lenght Min
+      !validator.isByteLength(username, {min:5, max:20}) ? errors.push({
+        "field": "username",
+        "key": "username.length",
+        "message": "Name must in 5 to 20 range"
+      }) : false;
+      // Alphanumeric Only
+      !validator.isAlphanumeric(username) ? errors.push({
+        "field": "username",
+        "key": "username.type",
+        "message": "Name must in alphanumeric type only"
+      }) : false;
+    } else {
+      errors.push({
+        "field": "username",
+        "key": "username.required",
+        "message": "Name is Required"
+      })
+    }
+
     // Password Section
-    // Empty Check
-    validator.isEmpty(password) ? errors.push({
-      "field": "password",
-      "key": "password.required",
-      "message": "Name is Required"
-    }) : false;
-    // Lenght Min
-    !validator.isByteLength(password, {min:8, max:20}) ? errors.push({
-      "field": "password",
-      "key": "password.length",
-      "message": "Name must in 8 to 20 range"
-    }) : false;
-    
+    if(password) {
+      // Empty Check
+      validator.isEmpty(password) ? errors.push({
+        "field": "password",
+        "key": "password.required",
+        "message": "Name is Required"
+      }) : false;
+      // Lenght Min
+      !validator.isByteLength(password, {min:8, max:20}) ? errors.push({
+        "field": "password",
+        "key": "password.length",
+        "message": "Name must in 8 to 20 range"
+      }) : false;
+    } else {
+      errors.push({
+        "field": "password",
+        "key": "password.required",
+        "message": "Name is Required"
+      });
+    }
+
     if(errors.length!=0) {
       res.status(400).json({
         'status': '400',
