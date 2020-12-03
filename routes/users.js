@@ -120,6 +120,21 @@ router.post('/', async (req, res, next) => {
       });
     }
 
+    // Check Username Taken
+    let user = models.users.findAll({
+      where: {
+        username: username
+      },
+      attributes: ['id']
+    });
+    if(user) {
+      errors.push({
+        "field": "username",
+        "key": "username.unique",
+        "message": "Username Already Taken"
+      });
+    }
+
     if(errors.length!=0) {
       res.status(400).json({
         'status': '400',
@@ -128,7 +143,7 @@ router.post('/', async (req, res, next) => {
       });
       res.end();
     }
-  
+
     await models.users.create({
       name: name,
       username: username,
@@ -140,8 +155,7 @@ router.post('/', async (req, res, next) => {
       'message': 'Success',
       'response': {
         'name': name,
-        'username': username,
-        'a': errors
+        'username': username
       }
     });
   } catch (err) {
