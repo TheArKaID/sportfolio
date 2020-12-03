@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: DataTypes.UUIDV4
     },
     name: DataTypes.STRING,
     username: DataTypes.STRING,
@@ -28,10 +28,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'users',
   });
-  
-  users.addHook('beforeSave', async (user) => {
-    return user.id = uuid();
-  });
-
   return users;
 };

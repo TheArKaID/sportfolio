@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   skills.init({
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: DataTypes.UUIDV4
     },
     user_id: DataTypes.UUID,
     name: DataTypes.STRING,
@@ -28,10 +28,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'skills',
   });
-
-  skills.addHook('beforeSave', async (skill) => {
-    return skill.id = uuid();
-  });
-
   return skills;
 };

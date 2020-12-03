@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   portfolios.init({
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: DataTypes.UUIDV4
     },
     user_id: DataTypes.UUID,
     project: DataTypes.STRING,
@@ -28,10 +28,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'portfolios',
   });
-  
-  portfolios.addHook('beforeSave', async (portfolio) => {
-    return portfolio.id = uuid();
-  });
-
   return portfolios;
 };
