@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   portfolios.init({
-    id: DataTypes.UUID,
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      allowNull: false
+    },
     user_id: DataTypes.UUID,
     project: DataTypes.STRING,
     description: DataTypes.STRING

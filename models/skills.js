@@ -15,7 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   skills.init({
-    id: DataTypes.UUID,
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      allowNull: false
+    },
     user_id: DataTypes.UUID,
     name: DataTypes.STRING,
     description: DataTypes.STRING
