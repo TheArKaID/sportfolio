@@ -3,6 +3,8 @@
 const models = require('../models/index');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const { response } = require('../app');
+const Op = models.Sequelize.Op;
 
 const schemaValidation = Joi.object().keys({
     user_id: Joi.string().guid({version:'uuidv4'}).required(),
@@ -16,35 +18,66 @@ const schemaDelete = Joi.object().keys({
     portfolio_id: Joi.string().guid({version:'uuidv4'}),
     token: Joi.alternatives().try(Joi.string(), Joi.number()).required()
 });
+const getPagination = (page, size) => {
+    const limit = size ? +size : 3;
+    const offset = page ? page * limit : 0;
+  
+    return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+    const { count: totalItems, rows: portfolios } = data;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+  
+    return { data: portfolios, currentPage, totalData: totalItems, pageSize: limit, totalPages  };
+};
+  
 
 let controllers = {
     get: async function (req, res, next) {
-        const portfolios = await models.portfolios.findAll({});
+        const { page, size, search } = req.query;
+        const { limit, offset } = getPagination(page, size);
+        const issearch = search ? { 
+            [Op.or]: [
+                {project: {[Op.like]: `%${search}%`}},
+                {description: {[Op.like]: `%${search}%`}}
+            ]
+         } : null;
 
-        try {
-            res.set({
+        res.set({
             'Content-Type': 'application/json'
+        })
+        
+        await models.portfolios
+            .findAndCountAll({
+                where: issearch,
+                limit,
+                offset
             })
-            if(portfolios.length!==0) {
-                res.json({
-                    'status': 200,
-                    'message': 'Success',
-                    'response': portfolios
-                })
-            } else {
-                res.status(200).json({
-                    'status': 204,
-                    'message': 'Unavailable',
-                    'error': 'Data Unavailable'
-                })
-            }
-        } catch (error) {
-            res.status(500).json({
-                'status': '500',
-                'message': 'Service Unavailable',
-                'error': error
+            .then( Portfolios => {
+                if(Portfolios.length!==0) {
+                    const response = getPagingData(Portfolios, page, limit);
+                    res.json({
+                        'status': 200,
+                        'message': 'Success',
+                        'response': response
+                    })
+                } else {
+                    res.status(200).json({
+                        'status': 204,
+                        'message': 'Unavailable',
+                        'error': 'Data Unavailable'
+                    })
+                }
             })
-        }
+            .catch(err => {
+                res.status(500).send({
+                    'status': '500',
+                    'message': 'Service Unavailable',
+                    'error': err.message
+                });
+            });
     },
     post: async function (req, res, next) {
         const {project, description, token} = req.body;
