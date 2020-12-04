@@ -2,7 +2,7 @@
 
 Is a simple personal Portfolio API that let you create and save your portfolio.
 
-Built with Express, MySQL, Sequelize and JWT. 
+Built with Express (and express-generator), MySQL, Sequelize and JWT. 
 
 ## Feature
 
