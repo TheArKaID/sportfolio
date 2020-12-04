@@ -21,7 +21,8 @@
     "morgan": "^1.9.1",
     "mysql2": "^2.2.5",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "swagger-ui-express": "^4.1.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

@@ -1,0 +1,595 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Sportfolio",
+        "description": "Sportfolio API Documentation",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:1234"
+        }
+    ],
+    "tags": [
+        {
+            "name": "GET",
+            "description": "GET for Reading Data"
+        },
+        {
+            "name": "POST",
+            "description": "POST for Inserting Data"
+        },
+        {
+            "name": "PUT",
+            "description": "PUT for Updating Data"
+        }
+    ],
+    "paths": {
+        "/users/": {
+            "get": {
+                "description": "Get All Users Data",
+                "tags": [
+                    "GET"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Success",
+                                            "response": {
+                                                "id": "181121c5-d80c-4f6a-aa54-0ae823d828de",
+                                                "name": "arifia",
+                                                "username": "theaasdq1"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Unavailable",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 204,
+                                            "message": "Unavailable",
+                                            "error": "Data Unavailable"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:1234"
+                    }
+                ]
+            },
+            "post": {
+                "description": "Create a User",
+                "tags": [
+                    "POST"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json;": {
+                            "schema": {
+                                "$ref": "#/components/users/schemas/body/post"
+                            },
+                            "examples": {
+                                "Body Request": {
+                                    "value": {
+                                        "name": "Arifia",
+                                        "username": "thearka",
+                                        "password": "Ak123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Success",
+                                            "response": {
+                                                "name": "Arifia",
+                                                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhNDA2NGIzLTcxZDEtNDgzNS1hZTUxLTIzOWE1OTIwN2NjMSIsImlhdCI6MTYwNzA2NTg2Mn0.fUo1c4UNwgV3zmR6Ph5XdywuQ4jhON4UnevwQK-pCsc"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 400,
+                                            "message": "Failed",
+                                            "error": {
+                                                "field": "username",
+                                                "key": "username.unique",
+                                                "message": "Username Already Taken"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": "500",
+                                            "message": "Service Unavailable",
+                                            "error": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:1234"
+                    }
+                ]
+            },
+            "servers": [
+                {
+                    "url": "http://localhost:1234"
+                }
+            ]
+        },
+        "/portfolios/": {
+            "get": {
+                "description": "Get All Portfolios Data",
+                "tags": [
+                    "GET"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Success",
+                                            "response": [
+                                                {
+                                                    "id": "0c290623-7108-458d-8b28-9eb0487aca6f",
+                                                    "user_id": "d640ab8b-276f-428d-bbf4-ee6b96a1d6f5",
+                                                    "project": "sportfolio",
+                                                    "description": "User, Portfolio, Skill",
+                                                    "createdAt": "2020-12-04T00:50:12.000Z",
+                                                    "updatedAt": "2020-12-04T00:50:12.000Z"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Unavailable",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 204,
+                                            "message": "Unavailable",
+                                            "error": "Data Unavailable"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:1234"
+                    }
+                ]
+            },
+            "post": {
+                "description": "Create a Portfolio",
+                "tags": [
+                    "POST"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/portfolios/schemas/body/post"
+                            },
+                            "examples": {
+                                "Body Request": {
+                                    "value": {
+                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhNDA2NGIzLTcxZDEtNDgzNS1hZTUxLTIzOWE1OTIwN2NjMSIsImlhdCI6MTYwNzA2NTg2Mn0.fUo1c4UNwgV3zmR6Ph5XdywuQ4jhON4UnevwQK-pCsc",
+                                        "project": "Portfolio",
+                                        "description": "Simple Portfolio API"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Success",
+                                            "response": {
+                                                "Project Name": "Portfolio",
+                                                "message": "Your Project Saved Succesfully"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "Unavailable",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 204,
+                                            "message": "Unavailable",
+                                            "error": "Data Unavailable"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 400,
+                                            "message": "Error",
+                                            "errors": {
+                                                "field": "token",
+                                                "key": "token.invalid",
+                                                "messgae": "Your Token was Wrong"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": "500",
+                                            "message": "Service Unavailable",
+                                            "error": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:1234"
+                    }
+                ]
+            },
+            "put": {
+                "description": "Updating a Portfolio",
+                "tags": [
+                    "PUT"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/portfolios/schemas/body/put"
+                            },
+                            "examples": {
+                                "Body Request": {
+                                    "value": {
+                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhNDA2NGIzLTcxZDEtNDgzNS1hZTUxLTIzOWE1OTIwN2NjMSIsImlhdCI6MTYwNzA2NTg2Mn0.fUo1c4UNwgV3zmR6Ph5XdywuQ4jhON4UnevwQK-pCsc",
+                                        "portfolio_id": "47220d47-7fde-457c-a850-d65292fc8eb8",
+                                        "project": "Portfolio 2",
+                                        "description": "Simple Portfolio API's"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Success",
+                                            "response": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "token": {
+                                        "value": {
+                                            "status": 400,
+                                            "message": "Error",
+                                            "errors": {
+                                                "field": "token",
+                                                "key": "token.invalid",
+                                                "messgae": "Your Token was Wrong"
+                                            }
+                                        }
+                                    },
+                                    "portfolio": {
+                                        "value": {
+                                            "status": 400,
+                                            "message": "Error",
+                                            "error": {
+                                                "field": "portfolio_id",
+                                                "key": "portfolio_id.incorrect",
+                                                "message": "Your Portfolio ID was Incorrect"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": "500",
+                                            "message": "Service Unavailable",
+                                            "error": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:1234"
+                    }
+                ]
+            },
+            "delete": {
+                "description": "Deleting a Portfolio",
+                "tags": [
+                    "DELETE"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/portfolios/schemas/body/delete"
+                            },
+                            "examples": {
+                                "Body Request": {
+                                    "value": {
+                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRhNDA2NGIzLTcxZDEtNDgzNS1hZTUxLTIzOWE1OTIwN2NjMSIsImlhdCI6MTYwNzA2NTg2Mn0.fUo1c4UNwgV3zmR6Ph5XdywuQ4jhON4UnevwQK-pCsc",
+                                        "portfolio_id": "47220d47-7fde-457c-a850-d65292fc8eb8"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": 200,
+                                            "message": "Success",
+                                            "response": {
+                                                "Project Name": "Portfolio",
+                                                "message": "Project Deleted"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "token": {
+                                        "value": {
+                                            "status": 400,
+                                            "message": "Error",
+                                            "error": {
+                                                "field": "token",
+                                                "key": "token.invalid",
+                                                "messgae": "Your Token was Wrong"
+                                            }
+                                        }
+                                    },
+                                    "porfolio_id": {
+                                        "value": {
+                                            "status": 400,
+                                            "message": "Error",
+                                            "error": {
+                                                "field": "portfolio_id",
+                                                "key": "portfolio_id.incorrect",
+                                                "message": "Your Portfolio ID was Incorrect"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "content": {
+                            "application/json; charset=utf-8": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "status": "500",
+                                            "message": "Service Unavailable",
+                                            "error": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:1234"
+                    }
+                ]
+            },
+            "servers": [
+                {
+                    "url": "http://localhost:1234"
+                }
+            ]
+        }
+    },
+    "components": {
+        "users": {
+            "schemas": {
+                "body": {
+                    "post": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "username": {
+                                "type": "string"
+                            },
+                            "password": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "portfolios": {
+            "schemas": {
+                "body": {
+                    "post": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string"
+                            },
+                            "project": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "put": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string"
+                            },
+                            "portfolio_id": {
+                                "type": "string"
+                            },
+                            "project": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "delete": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string"
+                            },
+                            "portfolio_id": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
