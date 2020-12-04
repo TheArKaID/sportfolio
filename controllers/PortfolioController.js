@@ -45,7 +45,7 @@ let controllers = {
         }
     },
     post: async function (req, res, next) {
-        const {project, platform, description, token} = req.body;
+        const {project, description, token} = req.body;
         const data = req.body;
 
         try {
@@ -113,7 +113,6 @@ let controllers = {
             await models.portfolios.create({
                 user_id: decoded_id,
                 project: project,
-                platform: platform,
                 description: description
             });
 
