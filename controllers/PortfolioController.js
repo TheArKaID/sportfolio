@@ -6,6 +6,7 @@ const Joi = require('joi');
 
 const schemaValidation = Joi.object().keys({
     user_id: Joi.string().guid({version:'uuidv4'}).required(),
+    portfolio_id: Joi.string().guid({version:'uuidv4'}),
     token: Joi.alternatives().try(Joi.string(), Joi.number()).required(),
     project: Joi.string().required(),
     description: Joi.string().required()
@@ -124,6 +125,107 @@ let controllers = {
             'status': '500',
             'message': 'Server Unavailable',
             'error': error
+            });
+        }
+    },
+    put: async function (req, res, next) {
+        let data = req.body;
+
+        try {
+            res.set({
+                'Content-Type': 'application/json'
+            })
+            // Get ID
+            var decoded_id = null;
+            
+            // validate token
+            if(data.token) {
+                jwt.verify(data.token, '@Sportfolio@', async (err, decoded) => {
+                    if(err) {
+                        res.status(400).json({
+                            'status': 400,
+                            'message': 'Error',
+                            'errors': {
+                                'field': 'token',
+                                'key': 'token.invalid',
+                                'messgae': 'Your Token was Wrong'
+                            }
+                        });
+                        res.end();
+                    }
+                    decoded_id = decoded.id;
+                    let users = await models.users.findAll({
+                        where: {
+                            id: decoded_id
+                        },
+                        attributes: ['id']
+                    });
+                    // check if user id is not exist
+                    if(users.length==0) {
+                        res.status(400).json({
+                        'status': 400,
+                        'message': 'Error',
+                        'errors': {
+                            'field': 'token',
+                            'key': 'token.invalid',
+                            'messgae': 'Your Token was Wrong'
+                        }
+                        });
+                        res.end();
+                    }
+                    
+                });
+                data.user_id = decoded_id;
+            }
+    
+            // validate data schema
+            const {error, value} = schemaValidation.validate(req.body);
+    
+            if(error) {
+                res.status(400).json({
+                    'status': 400,
+                    'message': 'Error',
+                    'error': {
+                    'field': error.details[0].path[0],
+                    'key': error.details[0].path[0]+'.'+error.details[0].type,
+                    'message': error.details[0].message
+                    }
+                });
+                res.end();
+            }
+            
+            let portfolio = await models.portfolios.findByPk(data.portfolio_id);
+            // Check if Portfolio is correct
+            if(!portfolio) {
+                res.status(400).json({
+                    'status': 400,
+                    'message': 'Error',
+                    'error': {
+                    'field': 'portfolio_id',
+                    'key': 'portfolio_id.incorrect',
+                    'message': 'Your Portfolio ID was Incorrect'
+                    }
+                });
+                res.end();
+            }
+            portfolio.project = data.project;
+            portfolio.description = data.description;
+            await portfolio.save();
+
+            res.status(200).json({
+                'status': 200,
+                'message': 'Success',
+                'response': {
+                    'Project Name': portfolio.project,
+                    'message': 'Your Project Updated Succesfully'
+                }
+            })
+            res.end();
+        } catch (error) {
+            res.status(500).json({
+                'status': '500',
+                'message': 'Server Unavailable',
+                'error': error
             });
         }
     }
