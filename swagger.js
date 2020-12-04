@@ -1,3 +1,5 @@
+require('dotenv').config();
+module.exports = 
 {
     "openapi": "3.0.1",
     "info": {
@@ -7,7 +9,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:1234"
+            "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
         }
     ],
     "tags": [
@@ -104,7 +106,7 @@
                 },
                 "servers": [
                     {
-                        "url": "http://localhost:1234"
+                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                     }
                 ]
             },
@@ -190,13 +192,13 @@
                 },
                 "servers": [
                     {
-                        "url": "http://localhost:1234"
+                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                     }
                 ]
             },
             "servers": [
                 {
-                    "url": "http://localhost:1234"
+                    "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                 }
             ]
         },
@@ -280,7 +282,7 @@
                 },
                 "servers": [
                     {
-                        "url": "http://localhost:1234"
+                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                     }
                 ]
             },
@@ -382,7 +384,7 @@
                 },
                 "servers": [
                     {
-                        "url": "http://localhost:1234"
+                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                     }
                 ]
             },
@@ -477,7 +479,7 @@
                 },
                 "servers": [
                     {
-                        "url": "http://localhost:1234"
+                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                     }
                 ]
             },
@@ -573,13 +575,13 @@
                 },
                 "servers": [
                     {
-                        "url": "http://localhost:1234"
+                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                     }
                 ]
             },
             "servers": [
                 {
-                    "url": "http://localhost:1234"
+                    "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
                 }
             ]
         }
