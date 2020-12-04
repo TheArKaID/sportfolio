@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const models = require('../models/index');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const Op = models.Sequelize.Op;
 
 const userSchema = Joi.object().keys({
     name: Joi.string().min(1).max(50).alphanum().required(),
@@ -60,7 +61,7 @@ let controllers = {
                     res.json({
                         'status': 204,
                         'message': 'Unavailable',
-                        'errors': 'Data Unavailable'
+                        'error': 'Data Unavailable'
                     })
                 }
             })

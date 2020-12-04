@@ -96,7 +96,7 @@ let controllers = {
                         res.status(400).json({
                             'status': 400,
                             'message': 'Error',
-                            'errors': {
+                            'error': {
                                 'field': 'token',
                                 'key': 'token.invalid',
                                 'messgae': 'Your Token was Wrong'
@@ -116,7 +116,7 @@ let controllers = {
                         res.status(400).json({
                         'status': 400,
                         'message': 'Error',
-                        'errors': {
+                        'error': {
                             'field': 'token',
                             'key': 'token.invalid',
                             'messgae': 'Your Token was Wrong'
@@ -184,7 +184,7 @@ let controllers = {
                         res.status(400).json({
                             'status': 400,
                             'message': 'Error',
-                            'errors': {
+                            'error': {
                                 'field': 'token',
                                 'key': 'token.invalid',
                                 'messgae': 'Your Token was Wrong'
@@ -204,7 +204,7 @@ let controllers = {
                         res.status(400).json({
                         'status': 400,
                         'message': 'Error',
-                        'errors': {
+                        'error': {
                             'field': 'token',
                             'key': 'token.invalid',
                             'messgae': 'Your Token was Wrong'
@@ -285,7 +285,7 @@ let controllers = {
                         res.status(400).json({
                             'status': 400,
                             'message': 'Error',
-                            'errors': {
+                            'error': {
                                 'field': 'token',
                                 'key': 'token.invalid',
                                 'messgae': 'Your Token was Wrong'
@@ -305,7 +305,7 @@ let controllers = {
                         res.status(400).json({
                         'status': 400,
                         'message': 'Error',
-                        'errors': {
+                        'error': {
                             'field': 'token',
                             'key': 'token.invalid',
                             'messgae': 'Your Token was Wrong'
