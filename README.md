@@ -18,16 +18,8 @@ Built with Express (and express-generator), MySQL, Sequelize and JWT.
 2. Install all needed package with your package manager (I use NPM)
 > npm install
 
-3. Config your database details in config/config.json
-```
-{
-    "username": "root",
-    "password": "",
-    "database": "sportfolio",
-    "host": "127.0.0.1", // your database server
-    "dialect": "mysql" // driver depends on database you used
-}
-```
+3. Configure your environment details in file .env
+> cp "example-rename to .env" ./.env
 
 4. Run Migration with Sequelize
 > sequelize db:migrate
@@ -72,3 +64,7 @@ And you will GET the datas that appear in the page 2.
 
 However, you can chain all of query string in any order, in example
 > localhost/users?search=arka&size=5&page=2
+
+### Give it a try
+[ArKa::Sportfolios](https://sportfolios.arka.web.id/) | 
+[ArKa::SportfoliosAPITest](https://sportfolios.arka.web.id/api-docs)
