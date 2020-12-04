@@ -26,21 +26,23 @@ let controllers = {
             'Content-Type': 'application/json'
             })
             if(portfolios.length!==0) {
-            res.json({
-                'status': 200,
-                'message': 'Success',
-                'response': portfolios
-            })
+                res.json({
+                    'status': 200,
+                    'message': 'Success',
+                    'response': portfolios
+                })
             } else {
-            res.status(200).json({
-                'status': 204,
-                'message': 'Unavailable',
-                'errors': 'Data Unavailable'
-            })
+                res.status(200).json({
+                    'status': 204,
+                    'message': 'Unavailable',
+                    'error': 'Data Unavailable'
+                })
             }
         } catch (error) {
             res.status(500).json({
-            'message': 'Server Error. Try again later.'
+                'status': '500',
+                'message': 'Service Unavailable',
+                'error': error
             })
         }
     },
@@ -126,9 +128,9 @@ let controllers = {
             });
         } catch (error) {
             res.status(500).json({
-            'status': '500',
-            'message': 'Server Unavailable',
-            'error': error
+                'status': '500',
+                'message': 'Server Unavailable',
+                'error': error
             });
         }
     },
@@ -190,9 +192,9 @@ let controllers = {
                     'status': 400,
                     'message': 'Error',
                     'error': {
-                    'field': error.details[0].path[0],
-                    'key': error.details[0].path[0]+'.'+error.details[0].type,
-                    'message': error.details[0].message
+                        'field': error.details[0].path[0],
+                        'key': error.details[0].path[0]+'.'+error.details[0].type,
+                        'message': error.details[0].message
                     }
                 });
                 res.end();
@@ -205,9 +207,9 @@ let controllers = {
                     'status': 400,
                     'message': 'Error',
                     'error': {
-                    'field': 'portfolio_id',
-                    'key': 'portfolio_id.incorrect',
-                    'message': 'Your Portfolio ID was Incorrect'
+                        'field': 'portfolio_id',
+                        'key': 'portfolio_id.incorrect',
+                        'message': 'Your Portfolio ID was Incorrect'
                     }
                 });
                 res.end();
@@ -291,9 +293,9 @@ let controllers = {
                     'status': 400,
                     'message': 'Error',
                     'error': {
-                    'field': error.details[0].path[0],
-                    'key': error.details[0].path[0]+'.'+error.details[0].type,
-                    'message': error.details[0].message
+                        'field': error.details[0].path[0],
+                        'key': error.details[0].path[0]+'.'+error.details[0].type,
+                        'message': error.details[0].message
                     }
                 });
                 res.end();
@@ -306,9 +308,9 @@ let controllers = {
                     'status': 400,
                     'message': 'Error',
                     'error': {
-                    'field': 'portfolio_id',
-                    'key': 'portfolio_id.incorrect',
-                    'message': 'Your Portfolio ID was Incorrect'
+                        'field': 'portfolio_id',
+                        'key': 'portfolio_id.incorrect',
+                        'message': 'Your Portfolio ID was Incorrect'
                     }
                 });
                 res.end();

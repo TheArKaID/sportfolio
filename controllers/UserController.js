@@ -25,7 +25,7 @@ let controllers = {
               res.json({
                 'status': 200,
                 'message': 'Success',
-                'data': users
+                'response': users
               })
             } else {
               res.json({
@@ -36,7 +36,9 @@ let controllers = {
             }
         } catch (error) {
             res.status(500).json({
-              'message': 'Server Error. Try again later.'
+              'status': '500',
+              'message': 'Service Unavailable',
+              'error': error
             })
         }
     },
@@ -103,11 +105,11 @@ let controllers = {
             }
           });
       
-        } catch (err) {
+        } catch (error) {
           res.status(500).json({
             'status': '500',
             'message': 'Service Unavailable',
-            'error': err
+            'error': error
           });
         }
         
