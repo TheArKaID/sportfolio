@@ -100,8 +100,7 @@ let controllers = {
             'response': {
               'name': name,
               'token': token
-            },
-            'value': value
+            }
           });
       
         } catch (err) {
