@@ -1,6 +1,6 @@
 require('dotenv').config();
 var url = process.env.API_URL ? `${process.env.API_URL}` : `http://localhost`;
-var apiUrl = process.env.API_URL ? `${url}:${process.env.API_URL}` : url;
+var apiUrl = process.env.API_PORT ? `${url}:${process.env.API_PORT}` : url;
 module.exports = 
 {
     "openapi": "3.0.1",
