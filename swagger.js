@@ -63,6 +63,24 @@ module.exports =
                         "schema": {
                             "type": "integer"
                         }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "description": "Sort the data by name or username. Default is createdAt",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "description": "The data order of the result. Pass ASC or DESC. Default is DESC",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "tags": [
@@ -81,7 +99,8 @@ module.exports =
                                             "response": {
                                                 "id": "181121c5-d80c-4f6a-aa54-0ae823d828de",
                                                 "name": "arifia",
-                                                "username": "theaasdq1"
+                                                "username": "theaasdq1",
+                                                "createdAt": "2020-12-04T07:11:02.000Z"
                                             }
                                         }
                                     }
@@ -233,6 +252,24 @@ module.exports =
                         "description": "How many data you want per page. Default is 3",
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "description": "Sort the data by project or desc (for description). Default is createdAt",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "description": "The data order of the result. Pass ASC or DESC. Default is DESC",
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
