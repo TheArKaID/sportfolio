@@ -34,7 +34,7 @@ Built with Express (and express-generator), MySQL, Sequelize and JWT.
 
 There's a path that you can use for testing the API, '/api-docs'.
 
-### Pagination and Filtering
+### Pagination, Filtering and Sorting
 
 For the GET request, the API will return the datas, total data, current page and total page, and you can control them.
 
@@ -58,12 +58,28 @@ If you want to GET the other page, not the first, use page query:
 > page:integer
 
 In example
-> localhost/user?page=2
+> localhost/users?page=2
 
 And you will GET the datas that appear in the page 2.
 
+If you need to sort it by a column, simply add sort parameter
+> sort:string
+
+In example
+> localhost/users?sort=name
+
+Then the data will be sorted by name. You can use name or username for Users, and project or desc (for description) for Portfolios. Default is createdAt
+
+Another usefull stuff, order parameter for ordering the data,
+> order:string
+
+In example
+> localhost/users?order=asc
+
+It can be ASC or DESC (no case-sensitive), but default is DESC
+
 However, you can chain all of query string in any order, in example
-> localhost/users?search=arka&size=5&page=2
+> localhost/users?search=arka&size=5&page=2&sort=name&order=asc
 
 ### Give it a try
 [ArKa::Sportfolios](https://sportfolios.arka.web.id/) | 
