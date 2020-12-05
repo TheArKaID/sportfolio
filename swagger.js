@@ -1,5 +1,6 @@
 require('dotenv').config();
-var url = process.env.API_URL ? `${process.env.API_URL}:${process.env.NODE_PORT}` : `${process.env.NODE_URL}:${process.env.NODE_PORT}`;
+var url = process.env.API_URL ? `${process.env.API_URL}` : `http://localhost`;
+var apiUrl = process.env.API_URL ? `${url}:${process.env.API_URL}` : url;
 module.exports = 
 {
     "openapi": "3.0.1",
@@ -10,7 +11,7 @@ module.exports =
     },
     "servers": [
         {
-            "url": `${url}`
+            "url": `${apiUrl}`
         }
     ],
     "tags": [
@@ -107,7 +108,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `${url}`
+                        "url": `${apiUrl}`
                     }
                 ]
             },
@@ -193,13 +194,13 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `${url}`
+                        "url": `${apiUrl}`
                     }
                 ]
             },
             "servers": [
                 {
-                    "url": `${url}`
+                    "url": `${apiUrl}`
                 }
             ]
         },
@@ -283,7 +284,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `${url}`
+                        "url": `${apiUrl}`
                     }
                 ]
             },
@@ -385,7 +386,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `${url}`
+                        "url": `${apiUrl}`
                     }
                 ]
             },
@@ -480,7 +481,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `${url}`
+                        "url": `${apiUrl}`
                     }
                 ]
             },
@@ -576,13 +577,13 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `${url}`
+                        "url": `${apiUrl}`
                     }
                 ]
             },
             "servers": [
                 {
-                    "url": `${url}`
+                    "url": `${apiUrl}`
                 }
             ]
         }
