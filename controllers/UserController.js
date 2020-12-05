@@ -27,16 +27,39 @@ const getPagingData = (data, page, limit) => {
     return { data: portfolios, currentPage, totalData: totalItems, pageSize: limit, totalPages  };
 };
 
+const getSorting = (sortBy, orderBy) => {
+    var sort = false;
+    if(sortBy) {
+        if(sortBy.toLowerCase()=='name') {
+            sort = 'name';
+        } else if(sortBy.toLowerCase()=='username') {
+            sort = 'username'
+        }
+    } else{
+        sort = "createdAt";
+    }
+
+    var order = false;
+    if(orderBy && orderBy.toUpperCase()=="ASC") {
+        order = "ASC"
+    } else {
+        order = "DESC";
+    }
+
+    return { sortBy: sort, orderBy: order };
+}
+
 let controllers = {
     get: async function(res, req, next){
-      const { page, size, search } = req.query;
-      const { limit, offset } = getPagination(page, size);
-      const issearch = search ? { 
-          [Op.or]: [
-              {name: {[Op.like]: `%${search}%`}},
-              {username: {[Op.like]: `%${search}%`}}
-          ]
-        } : null;
+        const { page, size, search, sort, order } = req.query;
+        const { limit, offset } = getPagination(page, size);
+        const issearch = search ? { 
+            [Op.or]: [
+                {name: {[Op.like]: `%${search}%`}},
+                {username: {[Op.like]: `%${search}%`}}
+            ]
+            } : null;
+        const { sortBy, orderBy} = getSorting(sort, order);
 
         res.set({
             'Content-Type': 'application/json'
@@ -45,9 +68,12 @@ let controllers = {
         await models.users
             .findAndCountAll({
                 where: issearch,
+                order: [
+                    [sortBy, orderBy]
+                ],
                 limit,
                 offset,
-                attributes: {exclude: ['password', 'createdAt', 'updatedAt']},
+                attributes: {exclude: ['password', 'updatedAt']},
             })
             .then( users => {
                 if(users.length!==0) {

@@ -32,18 +32,40 @@ const getPagingData = (data, page, limit) => {
   
     return { data: portfolios, currentPage, totalData: totalItems, pageSize: limit, totalPages  };
 };
-  
 
+const getSorting = (sortBy, orderBy) => {
+    var sort = false;
+    if(sortBy) {
+        if(sortBy.toLowerCase()=='project') {
+            sort = 'project';
+        } else if(sortBy.toLowerCase()=='desc') {
+            sort = 'description'
+        }
+    } else{
+        sort = "createdAt";
+    }
+
+    var order = false;
+    if(orderBy && orderBy.toUpperCase()=="ASC") {
+        order = "ASC"
+    } else {
+        order = "DESC";
+    }
+
+    return { sortBy: sort, orderBy: order };
+}
+  
 let controllers = {
     get: async function (req, res, next) {
-        const { page, size, search } = req.query;
+        const { page, size, search, sort, order } = req.query;
         const { limit, offset } = getPagination(page, size);
         const issearch = search ? { 
             [Op.or]: [
                 {project: {[Op.like]: `%${search}%`}},
                 {description: {[Op.like]: `%${search}%`}}
             ]
-         } : null;
+        } : null;
+        const { sortBy, orderBy} = getSorting(sort, order);
 
         res.set({
             'Content-Type': 'application/json'
@@ -52,6 +74,9 @@ let controllers = {
         await models.portfolios
             .findAndCountAll({
                 where: issearch,
+                order: [
+                    [sortBy, orderBy]
+                ],
                 limit,
                 offset
             })
