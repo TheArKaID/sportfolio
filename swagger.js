@@ -1,4 +1,5 @@
 require('dotenv').config();
+var url = process.env.API_URL ? `${process.env.API_URL}:${process.env.NODE_PORT}` : `${process.env.NODE_URL}:${process.env.NODE_PORT}`;
 module.exports = 
 {
     "openapi": "3.0.1",
@@ -9,7 +10,7 @@ module.exports =
     },
     "servers": [
         {
-            "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+            "url": `${url}`
         }
     ],
     "tags": [
@@ -106,7 +107,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                        "url": `${url}`
                     }
                 ]
             },
@@ -192,13 +193,13 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                        "url": `${url}`
                     }
                 ]
             },
             "servers": [
                 {
-                    "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                    "url": `${url}`
                 }
             ]
         },
@@ -282,7 +283,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                        "url": `${url}`
                     }
                 ]
             },
@@ -384,7 +385,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                        "url": `${url}`
                     }
                 ]
             },
@@ -479,7 +480,7 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                        "url": `${url}`
                     }
                 ]
             },
@@ -575,13 +576,13 @@ module.exports =
                 },
                 "servers": [
                     {
-                        "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                        "url": `${url}`
                     }
                 ]
             },
             "servers": [
                 {
-                    "url": `http://${process.env.NODE_URL}:${process.env.NODE_PORT}`
+                    "url": `${url}`
                 }
             ]
         }
